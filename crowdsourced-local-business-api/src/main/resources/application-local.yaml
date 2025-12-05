@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: crowdsourced-local-business-api
