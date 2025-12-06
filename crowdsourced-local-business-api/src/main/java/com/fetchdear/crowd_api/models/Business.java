@@ -1,6 +1,9 @@
 package com.fetchdear.crowd_api.models;
 
+import com.fetchdear.crowd_api.model.common.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -9,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-public class Business {
+@Getter
+@Setter
+public class Business extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int businessId;
+
     private String name;
     private String address;
     private String description;
@@ -22,7 +25,6 @@ public class Business {
     private int customerId;
     private int reviewId;
     private int favouriteId;
-    private LocalDateTime createdAt;
     private String createdBy;
 
     @JdbcTypeCode(SqlTypes.JSON)
