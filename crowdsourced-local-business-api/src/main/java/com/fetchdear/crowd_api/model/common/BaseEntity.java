@@ -2,9 +2,11 @@ package com.fetchdear.crowd_api.model.common;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,6 +22,7 @@ import java.util.Objects;
 @EnableJpaAuditing
 @MappedSuperclass
 @SuperBuilder
+@AllArgsConstructor
 public abstract class BaseEntity<T extends Serializable> implements Serializable {
 
     @Serial
@@ -47,14 +50,11 @@ public abstract class BaseEntity<T extends Serializable> implements Serializable
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o)
-                .getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this)
-                .getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
+        if (Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         BaseEntity<?> that = (BaseEntity<?>) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        return id != null && id.equals(that.id);
     }
+
 
 
     @Override
