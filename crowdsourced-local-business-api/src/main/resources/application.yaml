@@ -1,3 +1,12 @@
 spring:
   application:
     name: crowdsourced-local-business-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/business-directory
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
