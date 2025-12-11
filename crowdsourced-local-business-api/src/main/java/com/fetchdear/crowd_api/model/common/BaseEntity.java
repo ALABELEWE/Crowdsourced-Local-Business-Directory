@@ -2,9 +2,7 @@ package com.fetchdear.crowd_api.model.common;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
@@ -16,21 +14,21 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @EnableJpaAuditing
 @MappedSuperclass
 @SuperBuilder
-@AllArgsConstructor
-public abstract class BaseEntity<T extends Serializable> implements Serializable {
+@NoArgsConstructor
+public abstract class BaseEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5554308939380869754L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private T id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -51,7 +49,7 @@ public abstract class BaseEntity<T extends Serializable> implements Serializable
         if (this == o) return true;
         if (o == null) return false;
         if (Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        BaseEntity<?> that = (BaseEntity<?>) o;
+        BaseEntity that = (BaseEntity) o;
         return id != null && id.equals(that.id);
     }
 

@@ -1,3 +1,37 @@
 spring:
   application:
     name: crowdsourced-local-business-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/business-directory
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          crowdsource:
+            client-id: crowdsource
+            client-secret: YHE3Kx4FFNpMBc2a4UW9hX0IqvcIii9b
+            scope:
+              - openid
+              - profile
+              - email
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9000/login/oauth2/code/crowdsource
+#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          crowdsource:
+            issuer-uri: http://localhost:15000/realms/crowdsource
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:15000/realms/crowdsource
+server:
+  port: 9000

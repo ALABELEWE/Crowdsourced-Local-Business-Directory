@@ -2,7 +2,9 @@ package com.fetchdear.crowd_api.models;
 
 import com.fetchdear.crowd_api.model.common.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -14,7 +16,9 @@ import java.util.Map;
 @Entity
 @Getter
 @Setter
-public class Business extends BaseEntity<Long> {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Business extends BaseEntity {
 
 
     private String name;

@@ -1,26 +1,18 @@
 package com.fetchdear.crowd_api.services;
 
+import com.fetchdear.crowd_api.dto.CustomerRequest;
 import com.fetchdear.crowd_api.models.Customer;
-import com.fetchdear.crowd_api.repositories.CustomerRepository;
-import org.springframework.stereotype.Service;
+import com.fetchdear.crowd_api.dto.response.CustomerResponse;
 
-@Service
-public class CustomerService {
+public interface CustomerService {
 
-    CustomerRepository customerRepo;
+    CustomerResponse registerCustomer(CustomerRequest customer, String keycloakUserId);
 
-    public void registerCustomer(Customer customer){
-        customerRepo.save(customer);
-    }
+    Customer getCustomerByKeycloakUserId(String keycloakUserId);
 
-    public void viewCustomerDetails(){
-    }
+    void viewCustomerDetails();
 
-    public void updateCustomerDetails(Customer customer){
-        customerRepo.save(customer);
-    }
+    void updateCustomerDetails(Customer customer);
 
-    public void deleteCustomerDetails(){
-    }
-
+    void deleteCustomerDetails();
 }
