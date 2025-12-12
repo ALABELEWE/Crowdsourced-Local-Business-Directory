@@ -1,6 +1,6 @@
 package com.fetchdear.crowd_api.repositories;
 
-import com.fetchdear.crowd_api.models.Customer;
+import com.fetchdear.crowd_api.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

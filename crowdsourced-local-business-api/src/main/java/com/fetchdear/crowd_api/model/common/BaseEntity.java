@@ -2,38 +2,55 @@ package com.fetchdear.crowd_api.model.common;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
 
-@Data
+
+@Getter
+@Setter
 @EnableJpaAuditing
 @MappedSuperclass
 @SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity<T extends Serializable> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5554308939380869754L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private T id;
 
     @CreatedDate
+    @Column(name = "CREATED_DATE", updatable = false, nullable = false)
     private LocalDateTime createdAt;
+
     @LastModifiedDate
+    @Column(name = "LAST_MODIFIED_DATE", insertable = false)
     private LocalDateTime updatedAt;
+
+    @CreatedBy
+    @Column(name = "CREATED_BY", nullable = false, updatable = false)
+    private String createdBy;
+
+    @LastModifiedBy
+    @Column(name = "LAST_MODIFIED_BY", insertable = false)
+    private String lastModifiedBy;
 
     @PrePersist
     @PreUpdate
@@ -52,8 +69,6 @@ public abstract class BaseEntity implements Serializable {
         BaseEntity that = (BaseEntity) o;
         return id != null && id.equals(that.id);
     }
-
-
 
     @Override
     public final int hashCode() {
