@@ -21,16 +21,32 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    private String getKeycloakUserId(Jwt jwt){
+        String userId = jwt.getSubject();
+        if(userId == null || userId.isEmpty()){
+            throw new IllegalArgumentException("Invalid token: user ID not found");
+        }
+        return userId;
+    }
+
     @PostMapping("/profile")
     public ResponseEntity<ApiResponse<CustomerResponse>> createProfile(
             @Valid @RequestBody CustomerRequest customerRequest,
             @AuthenticationPrincipal Jwt jwt) {
 
-        String keycloakUserId = jwt.getSubject(); // Get Keycloak user ID from JWT
+        String keycloakUserId = getKeycloakUserId(jwt); // Get Keycloak user ID from JWT
         CustomerResponse response = customerService.registerCustomer(customerRequest, keycloakUserId);
         ApiResponse<CustomerResponse> apiResponse = new ApiResponse<>(HttpStatus.CREATED, "Customer created successfully", response);
         log.info("");
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping("profile")
+    public ResponseEntity<ApiResponse<CustomerResponse>> getProfile(@AuthenticationPrincipal Jwt jwt){
+        String keycloakUserId = getKeycloakUserId(jwt);
+        CustomerResponse response = customerService.getCustomerByKeycloakUserId(keycloakUserId);
+        ApiResponse<CustomerResponse> apiResponse = new ApiResponse<>(HttpStatus.OK, "Customer retrieved successfully", response);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
 }
