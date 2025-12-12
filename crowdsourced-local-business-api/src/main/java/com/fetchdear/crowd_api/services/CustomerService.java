@@ -4,11 +4,13 @@ import com.fetchdear.crowd_api.dto.CustomerRequest;
 import com.fetchdear.crowd_api.models.Customer;
 import com.fetchdear.crowd_api.dto.response.CustomerResponse;
 
+import java.util.Optional;
+
 public interface CustomerService {
 
     CustomerResponse registerCustomer(CustomerRequest customer, String keycloakUserId);
 
-    Customer getCustomerByKeycloakUserId(String keycloakUserId);
+    CustomerResponse getCustomerByKeycloakUserId(String keycloakUserId);
 
     void viewCustomerDetails();
 
