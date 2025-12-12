@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Review extends BaseEntity<Long> {
+public class Review extends BaseEntity {
 
     String title;
     int user_id;

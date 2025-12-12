@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Favourite extends BaseEntity<Long> {
+public class Favourite extends BaseEntity {
 
     String title;
     int user_id;
