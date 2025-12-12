@@ -8,6 +8,8 @@ import com.fetchdear.crowd_api.dto.response.CustomerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
@@ -35,8 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByKeycloakUserId(String keycloakUserId) {
-        return null;
+    public CustomerResponse getCustomerByKeycloakUserId(String keycloakUserId) {
+        // Check for user existence first
+        if(!customerRepo.existsByKeycloakUserId(keycloakUserId)){
+            throw new RuntimeException("Invalid customer!");
+        }
+        // Then get user details
+        Customer customer = customerRepo.findByKeycloakUserId(keycloakUserId);
+        return CustomerResponse.from(customer);
     }
 
     @Override

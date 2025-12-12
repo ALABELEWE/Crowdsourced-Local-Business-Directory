@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Optional<Customer> findByKeycloakUserId(String keycloakUserId);
+    Customer findByKeycloakUserId(String keycloakUserId);
     Optional<Customer> findByEmail(String email);
     boolean existsByKeycloakUserId(String keycloakUserId);
 }
