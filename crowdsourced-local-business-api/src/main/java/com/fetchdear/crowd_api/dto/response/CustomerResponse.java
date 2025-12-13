@@ -23,7 +23,7 @@ public class CustomerResponse {
 
     public static CustomerResponse from(Customer customer) {
         return CustomerResponse.builder()
-                .id((Long) customer.getId())
+                .id(customer.getId())
                 .firstName(customer.getFirstName())
                 .lastName(customer.getLastName())
                 .email(customer.getEmail())
