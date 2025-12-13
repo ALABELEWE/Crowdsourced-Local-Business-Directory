@@ -1,10 +1,12 @@
-package com.fetchdear.crowd_api.models;
+package com.fetchdear.crowd_api.model;
 
 import com.fetchdear.crowd_api.model.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer extends BaseEntity {
+public class Customer extends BaseEntity<Long> {
 
     String lastName;
     String firstName;

@@ -1,6 +1,6 @@
 package com.fetchdear.crowd_api.dto.response;
 
-import com.fetchdear.crowd_api.models.Customer;
+import com.fetchdear.crowd_api.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
