@@ -1,7 +1,7 @@
 package com.fetchdear.crowd_api.services.serviceImpl;
 
 import com.fetchdear.crowd_api.dto.CustomerRequest;
-import com.fetchdear.crowd_api.models.Customer;
+import com.fetchdear.crowd_api.model.Customer;
 import com.fetchdear.crowd_api.repositories.CustomerRepository;
 import com.fetchdear.crowd_api.services.CustomerService;
 import com.fetchdear.crowd_api.dto.response.CustomerResponse;

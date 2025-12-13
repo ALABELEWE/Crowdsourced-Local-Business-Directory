@@ -1,6 +1,6 @@
 package com.fetchdear.crowd_api.services;
 
-import com.fetchdear.crowd_api.models.Business;
+import com.fetchdear.crowd_api.model.Business;
 
 public interface BusinessService {
 

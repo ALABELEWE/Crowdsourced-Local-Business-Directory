@@ -1,6 +1,6 @@
 package com.fetchdear.crowd_api.dto.response;
 
-import com.fetchdear.crowd_api.models.Customer;
+import com.fetchdear.crowd_api.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class CustomerResponse {
 
     public static CustomerResponse from(Customer customer) {
         return CustomerResponse.builder()
-                .id(customer.getId())
+                .id((Long) customer.getId())
                 .firstName(customer.getFirstName())
                 .lastName(customer.getLastName())
                 .email(customer.getEmail())
